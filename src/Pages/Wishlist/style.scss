@@ -1,0 +1,69 @@
+.wishlist-heading {
+    text-align: center;
+    background-image: url("../../Assets/Images/shop-heading-back-image.jpg");
+    background-position: top;
+    height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      text-transform: capitalize;
+      font-size: 3.125pc;
+      font-weight: 400;
+      font-family: Barlow Semi Condensed;
+    }
+
+}
+
+#Wishlist{
+    padding: 40px 0;
+    font-family: Barlow Semi Condensed; 
+    .delete-row{
+        position: relative;
+        background-color: transparent;
+        border: none !important;
+    }
+    .delete-button{
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%,-50%);
+       cursor: pointer;
+    }   
+    .product-image{
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+    }
+    .image-row{
+        width: 20px;
+    }
+    .in-stock{
+        color: #868686;
+        margin-bottom: 10px;
+    }
+    .name-price-image-date-row{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-to-cart{
+        color: #fff;
+        font-size: 14px;
+        background-color: #000;
+        padding: 4px 10px;
+    }
+
+  .button-row-all{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    flex-direction: column;
+
+    a{
+        width: 40%;
+        text-align: center;
+        cursor: pointer;
+    }
+  }
+}

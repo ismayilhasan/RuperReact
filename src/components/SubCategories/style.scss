@@ -1,0 +1,24 @@
+#SubCategories{
+    img{
+        width: 100%;
+        transition: all .2s ease-in-out; 
+    }
+    
+    .main-content{
+        position: relative;
+        overflow: hidden;   
+ 
+        :hover{
+            transform: scale(1.1);
+   
+        }
+    }
+    .title{
+        font-family: Barlow Semi Condensed;
+        font-weight: 300;
+        color: #fff;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+    }
+}

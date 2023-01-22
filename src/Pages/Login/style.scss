@@ -1,0 +1,116 @@
+.login-heading {
+    text-align: center;
+    background-image: url("../../Assets/Images/shop-heading-back-image.jpg");
+    background-position: top;
+    height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      text-transform: capitalize;
+      font-size: 3.125pc;
+      font-weight: 400;
+      font-family: Barlow Semi Condensed;
+    }
+}
+
+
+#LoginSection{
+    font-family: Barlow Semi Condensed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    .box-content{
+        text-align: left;
+    }
+    .box-form-login{
+        width: 40%;
+        border: 1px solid #e5e5e5;
+        padding: 40px;
+        h2{
+            font-size: 20px;
+            padding-bottom: 11.25pt;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+            
+    }
+
+    .username{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        label{
+            color: #868686;
+        }
+
+        input{
+            margin-bottom: 0.9375pc;
+            padding: 0 1.25pc;
+            height: 3.4375pc;
+            width: 100%;
+            background: transparent;
+            outline: none;
+            border: 1px solid #e5e5e5;
+        }
+    }
+
+    .password{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        label{
+            color: #868686;
+        }
+
+        input{
+            margin-bottom: 0.9375pc;
+            padding: 0 1.25pc;
+            height: 3.4375pc;
+            width: 100%;
+            background: transparent;
+            outline: none;
+            border: 1px solid #e5e5e5;
+        }
+    }
+
+    .required{
+        color: red;
+    }
+
+    .rememberme-lost{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .remember-me{
+            display: flex;
+            input{
+                margin: 0 3px;
+            }
+            
+        }
+        .lost-password{
+            
+            a{
+                font-weight: 500;
+                color: #000;
+            }
+        }
+    }
+
+    .button-login{
+        margin-top: 20px;
+        input{
+            color: #fff;
+            background-color: #000;
+            width: 100%;
+            padding: 10px 0;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 9.75pt;
+        }
+    }
+}

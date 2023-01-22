@@ -1,0 +1,144 @@
+#Footer {
+  padding-top: 50px;
+  border-top: 1px solid #e5e5e5;
+  .footer-icon {
+    width: 100px;
+    height: 20px;
+  }
+
+  .heading {
+    h2 {
+      line-height: 1;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #000;
+      font-weight: 400;
+      font-family: Barlow Semi Condensed;
+      font-size: 14px;
+    }
+  }
+
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: Barlow Semi Condensed;
+      font-size: 14px;
+      color: #000;
+      font-weight: 300;
+    }
+    a {
+      text-decoration: none;
+      color: #868686;
+      font-family: Barlow Semi Condensed;
+      display: inline-block;
+      margin: 4px 0;
+    }
+  }
+
+  .footer-services {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: Barlow Semi Condensed;
+      font-size: 14px;
+      color: #000;
+      font-weight: 300;
+    }
+    a {
+      text-decoration: none;
+      color: #868686;
+      font-family: Barlow Semi Condensed;
+      display: inline-block;
+      margin: 4px 0;
+    }
+  }
+
+  .footer-newsletter {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: Barlow Semi Condensed;
+      font-size: 14px;
+      color: #000;
+      font-weight: 300;
+    }
+
+    .newsletter-text {
+      color: #868686;
+      font-family: Barlow Semi Condensed;
+    }
+
+    .email-input-area {
+      margin: 20px 0;
+
+      .footer-submit-button {
+        background-color: #000;
+        color: #fff;
+        width: 60px;
+        height: 48px;
+      }
+
+      input {
+        margin-right: 4px;
+        border: 1px solid #e8e8e8;
+        outline: none;
+        width: 241px;
+        height: 48px;
+        padding: 5px 20px;
+      }
+    }
+  }
+
+  .copyright-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+
+    .copyright {
+      font-family: Barlow Semi Condensed;
+      color: #868686;
+    }
+  }
+
+  .sosial-media-list {
+    display: flex;
+    i {
+      margin: 0 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+  }
+  .footer-icon-area {
+    margin-bottom: 20px;
+  }
+
+  .footer-contact {
+    margin-bottom: 20px;
+  }
+
+  .footer-services {
+    margin-bottom: 20px;
+  }
+  .footer-newsletter {
+    margin-bottom: 20px;
+  }
+
+  .email-input-area {
+    margin-bottom: 20px;
+
+    input {
+      width: 320px !important;
+    }
+  }
+}

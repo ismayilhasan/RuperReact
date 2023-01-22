@@ -1,0 +1,112 @@
+#LatestProducts {
+    padding: 40px 0;
+    text-align: center;
+    font-family: Barlow Semi Condensed;
+  .latest-products-heading {
+    text-align: center;
+    margin-bottom: 30px;
+    h2 {
+      font-weight: 300;
+      color: #868686;
+      font-size: 3.125pc;
+    }
+  }
+
+  .product-box {
+    position: relative;
+    &:hover {
+      button {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      .add-wishlist-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .add-wishlist-icon{
+    background-color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 500ms ease;
+  }
+
+  .product-box-text {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    .name {
+      display: inline-block;
+      color: #000;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: Barlow Semi Condensed;
+      margin: 10px 0;
+    }
+
+    .price{
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 10px;
+    }
+
+    button {
+      border: none;
+      background: #7d7d7d;
+      color: #f2f2f2;
+      padding: 10px 35px;
+      font-size: 18px;
+      border-radius: 5px;
+      position: relative;
+      box-sizing: border-box;
+      transition: all 500ms ease;
+      overflow: hidden;
+      opacity: 0;
+      margin-bottom: 20px;
+    }
+
+    button:before {
+      font-family: FontAwesome;
+      content: "\f217";
+      position: absolute;
+      top: 11px;
+      left: -30px;
+      transition: all 200ms ease;
+    }
+
+    button:hover:before {
+      left: 7px;
+    }
+
+    button:hover {
+      box-shadow: 1px 3px 8px #000;
+    }
+  }
+  .product-image {
+    width: 100%;
+  }
+
+
+  .loadmore-button{
+    border: 1px solid #868686;
+    background-color: transparent;
+    font-weight: 300;
+    font-family: Barlow Semi Condensed;  
+    padding: 5px 20px;
+    margin-top: 40px;
+    transition: .5s;
+
+    &:hover{
+        background-color: #000;        
+        color: #fff;
+    }
+  }
+}

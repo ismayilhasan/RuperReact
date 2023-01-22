@@ -1,0 +1,130 @@
+#Header{
+    padding: 24px 0 1px;
+    background-color: transparent;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: block;
+    border-bottom: 1px solid #f8f9fa;
+
+    .header-all{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header-logo-area{
+        width: 10%;
+        margin-right: 100px;
+    }
+
+    .navbar{
+        width: 80%;
+        
+        .navbar-all{
+            display: flex;
+            justify-content: center;
+        }
+        .nav-item{
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: .875pc;
+            text-transform: uppercase;
+            text-align: left;
+            line-height: 1.5pc;
+            letter-spacing: .125pc;
+            position: relative;
+            white-space: nowrap;
+            font-family: Barlow Semi Condensed; 
+            .navlink{
+                color: #000;
+            }
+            &::before{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0px;
+                background-color: #222;
+                height: 1px;
+                transition: 0.5s;
+            }
+
+            &:hover::before{
+                width: 44px;
+            }
+        }
+    }
+    
+    .right-icons-area{
+        width: 10%;
+       
+        .right-icons-area-all
+        {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .right-icons-item{
+            cursor: pointer;
+            margin: 0 6px;
+        }
+        .login-link{
+            color: #000;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 10px;
+            line-height: 1.5pc;
+            letter-spacing: .125pc;
+        }
+        .wishlist-link{
+            color: #000;
+        }
+    }
+
+    .header-logo-image{
+        width: 100px;
+        height: 20px;
+    }
+
+  
+    
+}
+
+#HeaderMobile{
+    padding: 14px 0;
+    display: none;
+    .icon-mobile-image{
+        width: 100px;
+        height: 20px;
+        object-fit: contain;
+    }
+    .header-mobile-all{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .burger-menu{
+        i{
+            color: #000;
+            font-size: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #Header{
+        display: none !important;
+    }
+
+    #HeaderMobile{
+        display: block;
+    }
+
+    .container{
+        margin: 0 1rem;
+    }
+}

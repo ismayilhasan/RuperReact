@@ -1,0 +1,233 @@
+.detail-heading {
+  text-align: center;
+  background-image: url("../../Assets/Images/shop-heading-back-image.jpg");
+  background-position: top;
+  height: 17rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    text-transform: capitalize;
+    font-size: 3.125pc;
+    font-weight: 400;
+    font-family: Barlow Semi Condensed;
+  }
+}
+
+#DetailHeading {
+  font-family: Barlow Semi Condensed;
+  padding: 40px 0;
+  .product-image{
+    background-image: url('../../Assets/Images/product1.jpg');
+    width: 100%;
+    height: 100vh;
+  
+  }
+
+  .product-info {
+    .title {
+      font-size: 30px;
+      line-height: 38px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      del {
+        color: #abab89;
+        margin-right: 10px;
+      }
+      ins {
+        color: red;
+      }
+    }
+
+    .rating {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 20px 0;
+      i {
+        color: gold;
+      }
+      .review-count {
+        margin-left: 10px;
+        color: #868686;
+      }
+    }
+
+    .description {
+      p {
+        color: #868686;
+      }
+    }
+
+    .color {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 20px;
+
+      h5 {
+        margin-right: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 20px;
+      }
+      span {
+        width: 28px;
+        height: 28px;
+        display: inline-block;
+        border-radius: 100%;
+        margin: 0 2px;
+      }
+      .color1 {
+        background: #000;
+      }
+      .color2 {
+        background: #5173a6;
+      }
+      .color3 {
+        background: #20b2aa;
+      }
+    }
+
+    .buttons {
+      .quantity {
+        margin: 0;
+        border: 1px solid #b5b5b5 !important;
+        height: 50px;
+        display: inline-block;
+        margin-right: 7px;
+        position: relative;
+      }
+      input {
+        width: 125px;
+        border: 0;
+        height: 46px;
+        text-align: center;
+        padding: 0 38px;
+        font-size: 18px;
+        font-weight: 500;
+        outline: none;
+      }
+
+      .plus {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        border: none;
+        width: 38px;
+        height: 46px;
+        background: transparent;
+      }
+      .minus {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        border: none;
+        width: 38px;
+        height: 46px;
+        background: transparent;
+      }
+
+      .btn-add-to-cart {
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        line-height: 50px;
+        position: relative;
+        background: rgba(0, 0, 0, 0.75);
+        text-align: center;
+        margin-right: 20px;
+        padding: 0 15px;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        flex: 1;
+        margin: 0;
+        white-space: nowrap;
+        width: 400px;
+        a {
+          color: #fff;
+        }
+      }
+
+      .btn-quick-buy{
+        width: 100%;
+
+        :hover{
+            background-color: #000;
+            color: #fff;
+        }
+      }
+      .buy-btn {
+        transition: none;
+        outline: none;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        line-height: 50px;
+        position: relative;
+        background: transparent;
+        color: #000;
+        border: 1px solid #000;
+        text-align: center;
+        margin-right: 20px;
+        padding: 0 15px;
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        margin: 5px 0;
+        white-space: nowrap;
+      }
+
+      .btn-wishlist{
+        margin-bottom: 20px;
+        button{
+            margin-top: 20px;
+            text-align: center;
+            color: #000;
+            display: inline-flex;
+            cursor: pointer;
+            vertical-align: top;
+            margin-right: 25px;
+            align-items: center;
+            font-weight: 500;
+            background: transparent;
+            font-size: 18px;
+            border: none;
+            padding:0;
+            
+        }
+
+        i{
+            border: 1px solid #868686;
+            border-radius: 100%;
+            padding: 9px;
+            display: inline-block;
+            margin-right: 6px;
+        }
+      }
+    }
+
+    .meta{
+        .sku,.tags,.category{
+            display: inline-flex;
+            color: #868686;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-right: 25px;
+
+            a{
+              color: #000;
+            }
+        }
+      
+        
+    }
+  }
+}

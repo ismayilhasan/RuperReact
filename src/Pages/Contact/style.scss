@@ -1,0 +1,60 @@
+.contact-heading {
+    text-align: center;
+    background-image: url("../../Assets/Images/shop-heading-back-image.jpg");
+    background-position: top;
+    height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      text-transform: capitalize;
+      font-size: 3.125pc;
+      font-weight: 400;
+      font-family: Barlow Semi Condensed;
+    }
+  }
+  
+
+#ContactBody{
+  padding: 40px 0;
+  font-family: Barlow Semi Condensed;
+  .map-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    iframe{
+      width: 100%;
+    }
+
+
+  }
+
+  .contact-area{
+    padding: 30px 0;
+    .contact-area-heading{
+      text-align: center;
+      padding: 30px 0;
+    }
+    .left,.middle,.right{
+      text-align: center;
+      .item-title{
+
+        h2{
+          font-size: .145833333in;
+          letter-spacing: 2.25pt;
+          text-transform: uppercase;
+          font-weight: bold;
+          color: #000;
+        }
+      }
+    }
+
+    p{
+      color: #868686;
+    }
+    .tel{
+      color: #868686;
+    }
+  
+  }
+}

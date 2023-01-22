@@ -1,0 +1,78 @@
+#BannerArea {
+    padding: 40px 0;
+  //left area
+  .left-banner {
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    .left-banner-text {
+      position: absolute;
+      bottom: 20%;
+      left: 50px;
+      .left-title-banner {
+        font-size: 0.395833353in;
+        font-weight: 400;
+        font-family: Barlow Semi Condensed;
+        color: #000;
+      }
+
+      .left-description-banner {
+        color: #868686;
+        line-height: 1.8;
+        font-weight: 400;
+        font-size: 15px;
+        margin-bottom: 20px;
+      }
+
+      .shop-button {
+        background: transparent;
+        color: #000;
+        border: 1px solid #000;
+        letter-spacing: 2px;
+        font-weight: 500;
+        font-family: Barlow Semi Condensed;
+        padding: 10px 20px;
+        margin-top: 30px;
+        transition: 0.5s;
+        &:hover {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  //right banner
+  .right-banner {
+    position: relative;
+    text-align: center;
+
+    .right-banner-text {
+      position: absolute;
+      bottom: 27%;
+      left: 29%;
+    }
+    img {
+      height: 370.5px;
+    }
+
+    .right-title-banner {
+      font-weight: 300;
+      span {
+        border-bottom: 1px solid #000;
+        font-weight: bold;
+        font-size: 1.875pc;
+      }
+    }
+
+    .right-description-banner {
+      color: #868686;
+      font-weight: 400;
+      font-size: 1rem;
+      font-family: Barlow Semi Condensed;
+    }
+  }
+}
