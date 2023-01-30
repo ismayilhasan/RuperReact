@@ -14,10 +14,10 @@ function SubCategories() {
           {subcategoires.isError && <p>Could not fetch users</p>}
           {subcategoires.isSuccess &&
             subcategoires.data.map((subcategory) => (
-              <Col md={4} col={12}>
+              <Col key={subcategory.id} md={4} col={12}>
                 <div className="main-content">
                   <img src={subcategory.imageName} />
-                  <h3 class="title">{subcategory.name}</h3>
+                  <h3 className="title">{subcategory.name}</h3>
                 </div>
               </Col>
             ))}

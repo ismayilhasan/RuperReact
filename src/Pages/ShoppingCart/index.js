@@ -1,7 +1,33 @@
 import React from "react";
 import "./style.scss";
-import product1 from '../../Assets/Images/product1.jpg'
+import product1 from "../../Assets/Images/product1.jpg";
+import { useAppContext } from "../../context/App";
 function ShoppingCart() {
+  const [{ cart }] = useAppContext();
+  const [productCount,setProductCount] = React.useState({})
+  let totalValue = 0;
+
+  React.useEffect(() => { 
+    const storedCount = localStorage.getItem('productCounts');
+    if (storedCount) {
+      setProductCount(JSON.parse(storedCount));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('productCounts', JSON.stringify(productCount));
+  },[productCount])  
+  
+  console.log(productCount);
+  const handeChangeCount = (id,event) => {
+    setProductCount((prevState) => {
+      const newState = { ...prevState };
+      newState[id] = event.target.value;  
+      return newState;
+    
+    })
+  }
+
   return (
     <>
       <div className="shopping-cart-heading">
@@ -12,101 +38,111 @@ function ShoppingCart() {
 
       <section id="ShoppingCart">
         <div className="container">
-          <div class="shop-cart wow slideInUp" data-wow-duration="2s">
-            <div class="container">
-              <div class="row pt-5">
+          <div className="shop-cart wow slideInUp" data-wow-duration="2s">
+            <div className="container">
+              <div className="row pt-5">
                 <div
-                  class="col-12 col-md-12  cart_table wow fadeInUp animated"
+                  className="col-12 col-md-12  cart_table wow fadeInUp animated"
                   data-wow-delay="300ms"
                 >
-                  <div class="table-responsive">
-                    <table class="table table-bordered border-radius">
+                  <div className="table-responsive">
+                    <table className="table table-bordered border-radius">
                       <thead>
                         <tr>
-                          <th class="darkcolor">Product</th>
-                          <th class="darkcolor">Price</th>
-                          <th class="darkcolor">Quantity</th>
-                          <th class="darkcolor">Total</th>
+                          <th className="darkcolor">Product</th>
+                          <th className="darkcolor">Price</th>
+                          <th className="darkcolor">Quantity</th>
+                          <th className="darkcolor">Total</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <div class="d-table product-detail-cart">
-                              <div class="media">
-                                <div class="row no-gutters">
-                                  <div class="col-12 col-lg-2 product-detail-cart-image">
-                                    <a class="shopping-product" href="#">
-                                      <img className="product-image"
-                                        src={product1}
-                                        alt="Generic placeholder image"
-                                      />
-                                    </a>
-                                  </div>
+                        {cart.map((product) => (
+                          <tr key={product.id}>
+                            <td>
+                              <div className="d-table product-detail-cart">
+                                <div className="media">
+                                  <div className="row no-gutters">
+                                    <div className="col-12 col-lg-2 product-detail-cart-image">
+                                      <a className="shopping-product" href="#">
+                                        <img
+                                          className="product-image"
+                                          src={product1}
+                                          alt="Generic placeholder image"
+                                        />
+                                      </a>
+                                    </div>
 
-                                  <div class="col-12 col-lg-10 mt-auto product-detail-cart-data">
-                                    <div class="media-body ml-lg-3">
-                                      <h4 class="product-name">
-                                        <a href="product-detail.html">
-                                          Leather Purse
-                                        </a>
-                                      </h4>
-                                      <p class="product-des">
-                                        We offer the most complete in the
-                                        country
-                                      </p>
+                                    <div className="col-12 col-lg-10 mt-auto product-detail-cart-data">
+                                      <div className="media-body ml-lg-3">
+                                        <h4 className="product-name">
+                                          <a href="product-detail.html">
+                                            {product.name}
+                                          </a>
+                                        </h4>
+                                        <p className="product-des">
+                                          {product.description.slice(0,46)}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </td>
-                          <td>
-                            <h4 class="text-center amount">$130.00</h4>
-                          </td>
-                          <td class="text-center">
-                            <div class="quote text-center mt-1">
-                              <input
-                                type="number"
-                                placeholder="1"
-                                class="quote"
-                                min="1"
-                                max="100"
-                              />
-                            </div>
-                          </td>
-                          <td>
-                            <h4 class="text-center amount">$136.00</h4>
-                          </td>
-                          <td class="text-center">
-                            <a class="btn-close" href="#.">
-                              <i class="lni-trash"></i>
-                            </a>
-                          </td>
-                        </tr>
-                    
+                            </td>
+                            <td>
+                              <h4 className="text-center amount">${product.price}</h4>
+                            </td>
+                            <td className="text-center">
+                              <div className="quote text-center mt-1">
+                                <input
+                                  type="number"
+                                  value={productCount[product.id] == undefined? 1 :productCount[product.id] }
+                 
+                                  min="1"
+                                  max="100"
+                                  onChange={(event) => handeChangeCount(product.id,event)}
+                                />
+                              </div>
+                            </td>
+                            <td>
+                         
+                            
+                              <h4 className="text-center amount">{(productCount[product.id] == undefined ? 1 : productCount[product.id])  * product.price}</h4>
+                            </td>
+                            <td className="text-center">
+                              <a className="btn-close" href="#.">
+                                <i className="lni-trash"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
-            
                 </div>
               </div>
             </div>
           </div>
           <div id="totalBox">
-        <h4>Cart Totals</h4>
-        <div class="total-div">
-          <div class="sub-total d-flex justify-content-start align-items-center">
-            <h6 class="me-3">Common Product Count </h6>
-            <p  id="subtotal"  class="mt-1">0</p>
+            <h4>Cart Totals</h4>
+            <div className="total-div">
+              <div className="sub-total d-flex justify-content-start align-items-center">
+                <h6 className="me-3">Common Product Count </h6>
+                <p id="subtotal" className="mt-1">
+                  {/* {Object.values(productCount).map((value) => (
+                      totalValue+=value
+                  ))}  */}
+                  
+                </p>
+              </div>
+              <div className="total d-flex justify-content-start">
+                <h6 className="me-3">total</h6>
+                <p id="total" className="">
+                  0
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="total d-flex justify-content-start">
-            <h6 class="me-3">total</h6>         
-            <p id="total" class="">0</p>
-          </div>
-        </div>
-      </div>
         </div>
       </section>
     </>

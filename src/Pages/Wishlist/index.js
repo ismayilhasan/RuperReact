@@ -12,11 +12,11 @@ function Wishlist() {
 
       <section id="Wishlist">
         <div className="container">
-          <table class="table table-bordered">
+          <table className="table table-bordered">
             <tbody>
               <tr>
                 <td className="delete-row" scope="row">
-                  <i class="fa-solid fa-xmark delete-button"></i>
+                  <i className="fa-solid fa-xmark delete-button"></i>
                 </td>
                 <td className="image-row">
                   <img className="product-image" src={product2} alt="" />
@@ -24,7 +24,7 @@ function Wishlist() {
                 <td className="name-price-image-date-row">
                   <a href="">Chair Oak Matt Lacquered</a>
                   <span>$150.00</span>
-                  <div class="wishlist-item-time">June 6, 2022</div>
+                  <div className="wishlist-item-time">June 6, 2022</div>
                 </td>
                 <td className="button-row">
                   <div className="button-row-all">
@@ -35,7 +35,7 @@ function Wishlist() {
               </tr>
               <tr>
                 <td className="delete-row" scope="row">
-                  <i class="fa-solid fa-xmark delete-button"></i>
+                  <i className="fa-solid fa-xmark delete-button"></i>
                 </td>
                 <td className="image-row">
                   <img className="product-image" src={product2} alt="" />
@@ -43,7 +43,7 @@ function Wishlist() {
                 <td className="name-price-image-date-row">
                   <a href="">Chair Oak Matt Lacquered</a>
                   <span>$150.00</span>
-                  <div class="wishlist-item-time">June 6, 2022</div>
+                  <div className="wishlist-item-time">June 6, 2022</div>
                 </td>
                 <td className="button-row">
                   <div className="button-row-all">
@@ -54,7 +54,7 @@ function Wishlist() {
               </tr>
               <tr>
                 <td className="delete-row" scope="row">
-                  <i class="fa-solid fa-xmark delete-button"></i>
+                  <i className="fa-solid fa-xmark delete-button"></i>
                 </td>
                 <td className="image-row">
                   <img className="product-image" src={product2} alt="" />
@@ -62,7 +62,7 @@ function Wishlist() {
                 <td className="name-price-image-date-row">
                   <a href="">Chair Oak Matt Lacquered</a>
                   <span>$150.00</span>
-                  <div class="wishlist-item-time">June 6, 2022</div>
+                  <div className="wishlist-item-time">June 6, 2022</div>
                 </td>
                 <td className="button-row">
                   <div className="button-row-all">

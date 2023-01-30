@@ -25,7 +25,12 @@
     }
 
     .filter-categories{
-
+      .reset{
+        color: #000;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+      }
     }
 
     .filter-categories-heading{

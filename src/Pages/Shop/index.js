@@ -3,15 +3,77 @@ import "./style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Row } from "react-bootstrap";
 import product1 from "../../Assets/Images/product1.jpg";
-import product2 from "../../Assets/Images/product2.jpg";
-import product3 from "../../Assets/Images/product3.jpg";
-import product4 from "../../Assets/Images/product4.jpg";
 import useBrands from "../../query-hooks/useBrands";
 import useCategories from "../../query-hooks/useCategoires";
+import useProducts from "../../query-hooks/useProducts";
+import { useHistory, useLocation } from "react-router-dom";
+import { useAppContext } from "../../context/App";
 function Shop() {
   const brands = useBrands();
   const { data: CategoriesData } = useCategories();
   const categoires = useCategories();
+  const products = useProducts();
+  const [filteredProducts, setFilteredProducts] = React.useState([]);
+  const [commonProducts,setCommonProducts] = React.useState([])
+  const history = useHistory();
+  const [ price, setPrice ] = React.useState(40.00);
+  const { state: stateCategoryFromProduct } = useLocation("");
+  const [{addToCart}] = useAppContext();
+
+  React.useEffect(() => {
+    if (products.isSuccess) {
+      setFilteredProducts(products.data);
+      setCommonProducts(products.data)
+    }
+
+    // if(stateCategoryFromProduct != "")
+    // {
+    //   filterByCategory(stateCategoryFromProduct)
+    // }
+
+   
+
+  }, [products.isSuccess, products.data,stateCategoryFromProduct]);
+
+  const handleAddToCartClick = (product) => {
+    addToCart(product);
+  };
+  const filterByCategory = (categoryItem) => {
+    const result = commonProducts.filter((product) => {
+
+    return product.categoryName === categoryItem
+
+    });
+    setFilteredProducts(result);
+  };
+
+
+  const filterByBrand = (brandItem) => {
+    const result = commonProducts.filter((product) => {
+      return product.brandName === brandItem
+    })
+    setFilteredProducts(result);
+  }
+
+
+  const getProductDetails = (id) => {
+    history.push("/details",id)
+  }
+
+
+  const handleInput = (e)=>{
+    setPrice( e.target.value );
+
+    const result = commonProducts.filter((product) => {
+    
+      return product.price >= parseInt(e.target.value )
+   
+    })
+
+
+    setFilteredProducts(result);
+  }
+
   return (
     <>
       <div className="shop-heading">
@@ -25,6 +87,7 @@ function Shop() {
             <Col md={3}>
               <div className="left-filter-area">
                 <div className="filter-categories">
+                <a  onClick={() => setFilteredProducts(commonProducts)} className="reset btn btn-primary text-white mb-2">Clear Filter</a>
                   <div className="filter-categories-heading">
                     <h2>Categories</h2>
                   </div>
@@ -35,18 +98,20 @@ function Shop() {
                         {categoires.isError && <p>Could not fetch users</p>}
                         {categoires.isSuccess &&
                           CategoriesData.map((category) => (
-                            <a key={category.id} href="shop-grid-left.html">
-                              {category.name} <span className="count">9</span>
+                            <a
+                              onClick={() => filterByCategory(category.name)}
+                              key={category.id}
+                            >
+                              {category.name}  <span className="count">9</span>
                             </a>
                           ))}
 
-                
                       </li>
                     </ul>
                   </div>
                 </div>
 
-                <div className="filter-brand-">
+                <div className="filter-brand">
                   <div className="filter-brand-heading">
                     <h2>Brand</h2>
                   </div>
@@ -55,10 +120,13 @@ function Shop() {
                     {brands.isError && <p>Could not fetch users</p>}
                     {brands.isSuccess &&
                       brands.data.map((brand) => (
-                        <img src={brand.imageName} alt="d" />
+                        <img onClick={() => filterByBrand(brand.name)} src={brand.imageName} alt="d" />
                       ))}
-                
                   </div>
+                </div>
+                <div className="filter-price mt-3">
+                  <input type="range" onInput={ handleInput } />
+                  <h1>Price: { price }</h1>
                 </div>
               </div>
             </Col>
@@ -75,86 +143,22 @@ function Shop() {
                 </select>
               </div>
               <Row>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product1} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product2} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product3} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product4} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product1} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product2} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product3} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
-                <Col md={4} col={12}>
-                  <div className="product-box">
-                    <img className="product-image" src={product4} alt="" />
-                    <div className="product-box-text">
-                      <a className="name">Dining Table</a>
-                      <span className="price">150.00</span>
-                      <button>Add to Cart</button>
-                    </div>
-                  </div>
-                </Col>
+                {products.isLoading && <p>Loading...</p>}
+                {products.isError && <p>Could not fetch users</p>}
+                {products.isSuccess &&
+                  filteredProducts.map((product) => (
+                    <Col key={product.id} md={4} col={12}>
+                   
+                      <div className="product-box">
+                        <img onClick={() => getProductDetails(product.id)}  className="product-image" src={product1} alt="" />
+                        <div className="product-box-text">
+                          <a className="name">{product.name}</a>
+                          <span className="price">{product.price}</span>
+                          <button onClick={() => handleAddToCartClick(product)}>Add to Cart</button>
+                        </div>
+                      </div>
+                    </Col>
+                  ))}
               </Row>
             </Col>
           </Row>

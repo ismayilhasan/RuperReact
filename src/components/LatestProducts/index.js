@@ -2,17 +2,29 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Row } from "react-bootstrap";
 import product1 from "../../Assets/Images/product1.jpg";
-import product2 from "../../Assets/Images/product2.jpg";
-import product3 from "../../Assets/Images/product3.jpg";
-import product4 from "../../Assets/Images/product4.jpg";
-
+import useProducts from "../../query-hooks/useProducts";
 import "./style.scss";
-function LatestProducts() {
-  const [isFilled, setIsFilled] = React.useState(true);
+import { useHistory } from "react-router-dom";
+import { useAppContext } from "../../context/App";
 
-  const HandleChangeHeatIcon = () => {
-    setIsFilled(!isFilled);
+function LatestProducts() {
+  const [{addToCart}] = useAppContext();
+  const [isFilled, setIsFilled] = React.useState(true);
+  const {data : productList} = useProducts()
+  const products = useProducts();
+  const history = useHistory();
+
+
+  const handleAddToCartClick = (product) => {
+      addToCart(product);
   };
+
+  const getProductDetails = (id) => {
+    history.push("/details",id)
+  }
+
+
+
   return (
     <section id="LatestProducts">
       <div className="container">
@@ -21,7 +33,30 @@ function LatestProducts() {
         </div>
         <div className="latest-product-body">
           <Row>
-            <Col md={3} col={12}>
+            {products.isLoading && <p>Loading...</p>}
+            {products.isError && <p>Could not fetch users</p>}
+            {products.isSuccess &&
+              products.data.slice(productList.length - 2).map((product) => (
+                <Col key={product.id} md={3} col={12}>
+                  <div className="product-box">
+                    <img onClick={() => getProductDetails(product.id)} className="product-image" src={product1} alt="" />
+                    <i
+                      onClick={() => setIsFilled(!isFilled)}
+                      className={
+                        isFilled
+                          ? "fa-regular fa-heart add-wishlist-icon"
+                          : "fa-solid fa-heart add-wishlist-icon"
+                      }
+                    ></i>
+                    <div className="product-box-text">
+                      <a className="name">{product.name}</a>
+                      <span className="price">${product.price}</span>
+                      <button onClick= {() => handleAddToCartClick(product)}>Add to Cart</button>
+                    </div>
+                  </div>
+                </Col>
+              ))}
+            {/* <Col md={3} col={12}>
               <div className="product-box">
                 <img className="product-image" src={product1} alt="" />
                 <i
@@ -124,7 +159,7 @@ function LatestProducts() {
                   <button>Add to Cart</button>
                 </div>
               </div>
-            </Col>
+            </Col> */}
           </Row>
           <button className="loadmore-button">Load more</button>
         </div>

@@ -2,10 +2,61 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.scss";
 import { Col, Row } from "react-bootstrap";
-import product2 from '../../Assets/Images/product2.jpg'
-import useBrands from "../../query-hooks/useBrands";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import product1 from "../../Assets/Images/product1.jpg";
+import { useAppContext } from "../../context/App";
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div className="next-arrow" onClick={onClick}>
+      <i class="fa-solid fa-angle-right arrow-icon"></i>
+    </div>
+  
+
+  );
+}
+
+function PrevArrow(props) {
+  const {  onClick } = props;
+  return (
+    <div className="prev-arrow" onClick={onClick}>
+      <i class="fa-solid fa-angle-left arrow-icon"></i>
+    </div>
+  );
+}
+
 function ProductDetail() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    // vertical: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
+  const [array, setArray] = React.useState([]);
+  const [starCount, setStarCount] = React.useState([]);
+  const { state: stateIdFromProduct } = useLocation();
+  const [{addToCart}] = useAppContext();
+  const fetchProductDetails = (id) =>
+    axios
+      .get(`https://localhost:7216/api/Products/${stateIdFromProduct}`)
+      .then((response) => response.data);
+
+  const productDetails = useQuery("details", fetchProductDetails);
+  const { data: productDetailsData } = useQuery("details", fetchProductDetails);
+
+  const handleAddToCartClick = (product) => {
+    addToCart(product);
+};
+  
 
   return (
     <>
@@ -15,113 +66,129 @@ function ProductDetail() {
         </div>
       </div>
 
-      <section id="DetailHeading">
-        <div className="container">
-          <Row>
-            <Col md={6}>
-              <div className="product-image">
-              </div>
-            </Col>
-            <Col md={6}>
-              <div className="product-info">
-                <h1 class="title">Bora Armchair</h1>
-                <div className="price">
-                  <del>
-                    <span className="real-pice">$100.00</span>
-                  </del>
-                  <ins>
-                    <span className="discount">$90.00</span>
-                  </ins>
-                  <div class="rating">
-                    <div class="star star-5">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="review-count">
-                      (3<span> reviews</span>)
-                    </div>
-                  </div>
-                  <div className="description">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.
-                    </p>
-                  </div>
-                  <div className="color">
-                    <h5>Color :</h5>
-                    <div className="colors">
-                      <span className="color1"></span>
-                      <span className="color2"></span>
-                      <span className="color3"></span>
-                    </div>
-                  </div>
-                  <div className="buttons">
-                    <div className="quantity">
-                      <button className="plus">
-                        <i class="fa-solid fa-plus"></i>
-                      </button>
-                      <input
-                        min="0"
-                        max=""
-                        name="quantity"
-                        value="1"
-                        size="4"
-                        inputmode="numeric"
-                        autocomplete="off"
-                      />
-                      <button className="minus">
-                        <i className="fa-solid fa-minus"></i>
-                      </button>
-                    </div>
-                    <div className="btn-add-to-cart">
-                      <a href="#" class="button" tabindex="0">
-                        Add to cart
-                      </a>
-                    </div>
-                    <div className="btn-quick-buy">
-                      <button className="buy-btn">Buy It Now</button>
-                    </div>
-                    <div class="btn-wishlist" data-title="Wishlist">
-                      <button class="product-btn">
-                        <i class="fa-regular fa-heart"></i>
-                        Add to Wishlist
-                      </button>
-                    </div>
-                  </div>
-                  <div class="meta">
-                    <span class="sku">
-                      SKU: <span class="sku">D2300-3-2-2</span>
+      {productDetails.isLoading && <p>Loading...</p>}
+      {productDetails.isError && <p>Could not fetch users</p>}
+      {productDetails.isSuccess && (
+        <section id="DetailHeading">
+          <div className="container">
+          
+            <Row>
+              
+              <Col md={6}>
+              <div className="main-slider">
+              <Slider {...settings}>
+                <div className="slide-image">
+                  <img src={product1} alt="" />
+                </div>
+                <div className="slide-image">
+                  <img src={product1} alt="" />
+                </div>
+                <div className="slide-image"> 
+                  <img src={product1} alt="" />
+                </div>
+                <div className="slide-image"> 
+                  <img src={product1} alt="" />
+                </div>
+              </Slider>
+            </div>
+                <div className="product-image"></div>
+              </Col>
+              <Col md={6}>
+                <div className="product-info">
+                  <h1 className="title">{productDetailsData.name}</h1>
+                  <div className="price">
+                    {/* Burda Del var idi Sildim ! */}
+                    <span className="real-pice">
+                      Price : {productDetailsData.price}$
                     </span>
-                    <span class="category">
-                      Category:
-                      <a href="shop-grid-left.html" rel="tag">
-                        Furniture
-                      </a>
-                    </span>
-                    <span class="tags">
-                      Tags:
-                      <a href="shop-grid-left.html" rel="tag">
-                        Hot
-                      </a>
-                      ,
-                      <a href="shop-grid-left.html" rel="tag">
-                        Trend
-                      </a>
-                    </span>
+
+                    <ins>
+                      <span className="discount">
+                        {productDetailsData.discount}
+                      </span>
+                    </ins>
+                    <div className="rating">
+                      <div className="star star-5">
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                        <i className="fa-solid fa-star"></i>
+                      </div>
+                      <div className="review-count">
+                        (3<span> reviews</span>)
+                      </div>
+                    </div>
+                    <div className="description">
+                      <p>{productDetailsData.description}</p>
+                    </div>
+                    <div className="color">
+                      <h5>Color :</h5>
+                      <div className="colors">
+                        {console.log(productDetailsData)}
+                        <span className="color1"></span>
+                        <span className="color2"></span>
+                        <span className="color3"></span>
+                      </div>
+                    </div>
+                    <div className="buttons">
+                      <div className="quantity">
+                        <button className="plus">
+                          <i className="fa-solid fa-plus"></i>
+                        </button>
+                        <input
+                          min="0"
+                          max="3"
+                          name="quantity"
+                          inputMode="numeric"
+                        />
+                        <button className="minus">
+                          <i className="fa-solid fa-minus"></i>
+                        </button>
+                      </div>
+                      <div onClick={() => handleAddToCartClick(productDetailsData)} className="btn-add-to-cart">
+                        <a href="#" className="button">
+                          Add to cart
+                        </a>
+                      </div>
+                      <div className="btn-quick-buy">
+                        <button className="buy-btn">Buy It Now</button>
+                      </div>
+                      <div className="btn-wishlist" data-title="Wishlist">
+                        <button className="product-btn">
+                          <i className="fa-regular fa-heart"></i>
+                          Add to Wishlist
+                        </button>
+                      </div>
+                    </div>
+                    <div className="meta">
+                      <span className="sku">
+                        SKU: <span className="sku">D2300-3-2-2</span>
+                      </span>
+                      <span className="category">
+                        Category:
+                        <a href="shop-grid-left.html" rel="tag">
+                          {productDetailsData.categoryName}
+                        </a>
+                      </span>
+                      <span className="tags">
+                        Tags:
+                        <a href="shop-grid-left.html" rel="tag">
+                          Hot
+                        </a>
+                        ,
+                        <a href="shop-grid-left.html" rel="tag">
+                          Trend
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </section>
+              </Col>
+            </Row>
+          </div>
+        </section>
+      )}
     </>
   );
 }

@@ -10,40 +10,40 @@ function Register() {
       </div>
 
       <section id="LoginSection">
-        <div class="box-form-login">
-          <h2><i class="fa-solid fa-user"></i>Register</h2>
-          <div class="box-content">
-            <div class="form-login">
-              <form method="post" class="login">
-                <div class="username">
+        <div className="box-form-login">
+          <h2><i className="fa-solid fa-user"></i>Register</h2>
+          <div className="box-content">
+            <div className="form-login">
+              <form method="post" className="login">
+                <div className="username">
                   <label>
-                    Username or email address <span class="required">*</span>
+                    Username or email address <span className="required">*</span>
                   </label>
                   <input
                     type="text"
-                    class="input-text"
+                    className="input-text"
                     name="username"
                     id="username"
                   />
                 </div>
-                <div class="password">
+                <div className="password">
                   <label for="password">
-                    Password <span class="required">*</span>
+                    Password <span className="required">*</span>
                   </label>
-                  <input class="input-text" type="password" name="password" />
+                  <input className="input-text" type="password" name="password" />
                 </div>
-                <div class="confirm-password">
+                <div className="confirm-password">
                   <label for="password">
-                    Confirm Password <span class="required">*</span>
+                    Confirm Password <span className="required">*</span>
                   </label>
-                  <input class="input-text" type="password" name="password" />
+                  <input className="input-text" type="password" name="password" />
                 </div>
                 
             
-                <div class="button-login">
+                <div className="button-login">
                   <input
                     type="submit"
-                    class="button"
+                    className="button"
                     name="login"
                     value="Login"
                   />
