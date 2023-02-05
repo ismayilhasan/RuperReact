@@ -43,7 +43,11 @@ function Header() {
                       Contact
                     </Link>
                   </li>
-                  <li className="nav-item">About Us</li>
+                
+                  <li className="nav-item">
+                    <Link className="navlink" to="/about-us">
+                    About Us
+                    </Link></li>
                 </ul>
               </nav>
             </div>

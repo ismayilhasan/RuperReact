@@ -2,6 +2,8 @@
     img{
         width: 100%;
         transition: all .2s ease-in-out; 
+        height: 525px;
+        object-fit: cover;
     }
     
     .main-content{

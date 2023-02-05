@@ -5,7 +5,7 @@ import { useAppContext } from "../../context/App";
 function ShoppingCart() {
   const [{ cart }] = useAppContext();
   const [productCount,setProductCount] = React.useState({})
-  let totalValue = 0;
+
 
   React.useEffect(() => { 
     const storedCount = localStorage.getItem('productCounts');
@@ -18,7 +18,6 @@ function ShoppingCart() {
     localStorage.setItem('productCounts', JSON.stringify(productCount));
   },[productCount])  
   
-  console.log(productCount);
   const handeChangeCount = (id,event) => {
     setProductCount((prevState) => {
       const newState = { ...prevState };

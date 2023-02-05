@@ -63,9 +63,9 @@
   }
 
   .product-image {
-    background-image: url("../../Assets/Images/product1.jpg");
-    background-position: center;
+    background-position:center;
     background-size: cover;
+    object-fit: cover;
     width: 100%;
     height: 80vh;
     
@@ -127,27 +127,19 @@
         border-radius: 100%;
         margin: 0 2px;
       }
-      .color1 {
-        background: #000;
-      }
-      .color2 {
-        background: #5173a6;
-      }
-      .color3 {
-        background: #20b2aa;
-      }
+   
     }
 
     .buttons {
       .quantity {
-        margin: 0;
         border: 1px solid #b5b5b5 !important;
         height: 50px;
+        padding-top: 3px;
         display: inline-block;
         margin-right: 7px;
         position: relative;
       }
-      input {
+      span {
         width: 125px;
         border: 0;
         height: 46px;

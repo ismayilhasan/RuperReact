@@ -14,6 +14,7 @@ import Register from "./Pages/Register";
 import Wishlist from "./Pages/Wishlist";
 import ShoppingCart from "./Pages/ShoppingCart";
 import { QueryClientProvider,QueryClient} from "react-query";
+import AboutUs from "./Pages/AboutUs";
 // import Shop from "./Pages/Shop";
 function App() {
   const queryClient = new QueryClient();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/shop/shop-cart" exact>
                 <ShoppingCart/>
+          </Route>
+          <Route path="/about-us" exact>
+                <AboutUs/>
           </Route>
         </Switch>
         <Footer/>

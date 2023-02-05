@@ -1,7 +1,22 @@
 import React from "react";
 import "./style.scss";
 import product2 from "../../Assets/Images/product2.jpg";
+import { useAppContext } from "../../context/App";
 function Wishlist() {
+  const [{ wishlistCart,setWishlistCart }] = useAppContext();
+  const [{ addToCart }] = useAppContext();
+
+  const handleAddToCartClick = (product) => {
+    addToCart(product);
+  };
+
+  const deleteProduct = (id) => {
+    const newWishlistCart = wishlistCart.filter(product => (product.id !==  id))
+    console.log("test");
+    console.log(newWishlistCart);
+    setWishlistCart(newWishlistCart)
+  }
+
   return (
     <>
       <div className="wishlist-heading">
@@ -14,63 +29,32 @@ function Wishlist() {
         <div className="container">
           <table className="table table-bordered">
             <tbody>
-              <tr>
-                <td className="delete-row" scope="row">
-                  <i className="fa-solid fa-xmark delete-button"></i>
-                </td>
-                <td className="image-row">
-                  <img className="product-image" src={product2} alt="" />
-                </td>
-                <td className="name-price-image-date-row">
-                  <a href="">Chair Oak Matt Lacquered</a>
-                  <span>$150.00</span>
-                  <div className="wishlist-item-time">June 6, 2022</div>
-                </td>
-                <td className="button-row">
-                  <div className="button-row-all">
-                  <div className="in-stock">In stock</div>
-                  <a className="add-to-cart">Add to Cart</a>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td className="delete-row" scope="row">
-                  <i className="fa-solid fa-xmark delete-button"></i>
-                </td>
-                <td className="image-row">
-                  <img className="product-image" src={product2} alt="" />
-                </td>
-                <td className="name-price-image-date-row">
-                  <a href="">Chair Oak Matt Lacquered</a>
-                  <span>$150.00</span>
-                  <div className="wishlist-item-time">June 6, 2022</div>
-                </td>
-                <td className="button-row">
-                  <div className="button-row-all">
-                  <div className="in-stock">In stock</div>
-                  <a className="add-to-cart">Add to Cart</a>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td className="delete-row" scope="row">
-                  <i className="fa-solid fa-xmark delete-button"></i>
-                </td>
-                <td className="image-row">
-                  <img className="product-image" src={product2} alt="" />
-                </td>
-                <td className="name-price-image-date-row">
-                  <a href="">Chair Oak Matt Lacquered</a>
-                  <span>$150.00</span>
-                  <div className="wishlist-item-time">June 6, 2022</div>
-                </td>
-                <td className="button-row">
-                  <div className="button-row-all">
-                  <div className="in-stock">In stock</div>
-                  <a className="add-to-cart">Add to Cart</a>
-                  </div>
-                </td>
-              </tr>
+              {wishlistCart.map((product) => (
+                <tr key={product.id}>
+                  <td className="delete-row" scope="row">
+                    <i onClick={() => deleteProduct(product.id)} className="fa-solid fa-xmark delete-button"></i>
+                  </td>
+                  <td className="image-row">
+                    <img className="product-image" src={product2} alt="" />
+                  </td>
+                  <td className="name-price-image-date-row">
+                    <a href="">{product.name}</a>
+                    <span>${product.price}</span>
+                    <div className="wishlist-item-time">June 6, 2022</div>
+                  </td>
+                  <td className="button-row">
+                    <div className="button-row-all">
+                      <div className="in-stock">In stock</div>
+                      <a
+                        onClick={() => handleAddToCartClick(product)}
+                        className="add-to-cart"
+                      >
+                        Add to Cart
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

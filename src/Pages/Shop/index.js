@@ -9,6 +9,7 @@ import useProducts from "../../query-hooks/useProducts";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppContext } from "../../context/App";
 function Shop() {
+
   const brands = useBrands();
   const { data: CategoriesData } = useCategories();
   const categoires = useCategories();
@@ -19,7 +20,8 @@ function Shop() {
   const [ price, setPrice ] = React.useState(40.00);
   const { state: stateCategoryFromProduct } = useLocation("");
   const [{addToCart}] = useAppContext();
-
+  const [sort, setSort] = React.useState("choose");
+  console.log(sort);
   React.useEffect(() => {
     if (products.isSuccess) {
       setFilteredProducts(products.data);
@@ -60,6 +62,23 @@ function Shop() {
     history.push("/details",id)
   }
 
+  const filterBySelect = (event) => {
+    setSort(event.target.value)
+    if(sort === 'high-to-low')
+    {
+      const result = commonProducts.slice().sort((a, b) => b.price - a.price).reverse()
+      setFilteredProducts(result)
+    }
+    else if(sort === 'low-to-high')
+    {
+      const result = commonProducts.slice().sort((a, b) => b.price - a.price)
+      setFilteredProducts(result)
+    }
+    
+  
+  }
+
+ 
 
   const handleInput = (e)=>{
     setPrice( e.target.value );
@@ -73,6 +92,9 @@ function Shop() {
 
     setFilteredProducts(result);
   }
+
+  
+  
 
   return (
     <>
@@ -120,12 +142,12 @@ function Shop() {
                     {brands.isError && <p>Could not fetch users</p>}
                     {brands.isSuccess &&
                       brands.data.map((brand) => (
-                        <img onClick={() => filterByBrand(brand.name)} src={brand.imageName} alt="d" />
+                        <img key={brand.id} onClick={() => filterByBrand(brand.name)} src={brand.imageName} alt="d" />
                       ))}
                   </div>
                 </div>
                 <div className="filter-price mt-3">
-                  <input type="range" onInput={ handleInput } />
+                  <input type="range" onInput={ handleInput } max={500}/>
                   <h1>Price: { price }</h1>
                 </div>
               </div>
@@ -133,13 +155,10 @@ function Shop() {
             <Col md={9}>
               <div className="products-top">
                 <div className="text">Showing all 21 results</div>
-                <select>
-                  <option data-display="Select">Default Sorting</option>
-                  <option value="1">Sort by Price : Low to High</option>
-                  <option value="2">Sort by Price : High to Low</option>
-                  <option value="3" disabled>
-                    Sort By Latest
-                  </option>
+                <select  value={sort} onChange={filterBySelect}>
+                <option  value="choose">Choose</option>
+                  <option  value="low-to-high">Sort by Price : Low to High</option>
+                  <option value="high-to-low">Sort by Price : High to Low</option>
                 </select>
               </div>
               <Row>

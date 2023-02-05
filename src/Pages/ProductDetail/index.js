@@ -14,18 +14,16 @@ function NextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div className="next-arrow" onClick={onClick}>
-      <i class="fa-solid fa-angle-right arrow-icon"></i>
+      <i className="fa-solid fa-angle-right arrow-icon"></i>
     </div>
-  
-
   );
 }
 
 function PrevArrow(props) {
-  const {  onClick } = props;
+  const { onClick } = props;
   return (
     <div className="prev-arrow" onClick={onClick}>
-      <i class="fa-solid fa-angle-left arrow-icon"></i>
+      <i className="fa-solid fa-angle-left arrow-icon"></i>
     </div>
   );
 }
@@ -41,22 +39,74 @@ function ProductDetail() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-  const [array, setArray] = React.useState([]);
-  const [starCount, setStarCount] = React.useState([]);
   const { state: stateIdFromProduct } = useLocation();
-  const [{addToCart}] = useAppContext();
+  const [{ addToCart }] = useAppContext();
+  const [productCount, setProductCount] = React.useState(5);
+  const [isFilled, setIsFilled] = React.useState(false);
+  const [{ addToWishlist }] = useAppContext();
+  const [productColors, setProductColors] = React.useState([]);
+  const [colorImages, setColorImages] = React.useState([]);
+  const [mainImage,setMainImage] = React.useState("")
+  const fetchProductColorImages = (images) => {
+    setColorImages(images);
+    setMainImage(images[0].imageName)
+  };
+ 
+  React.useEffect(() => {
+    if (isSuccess) {
+      setProductColors(productDetailsData.generalProductColors);
+      // console.log(productDetailsData.generalProductColors);
+      // console.log(productDetailsData.generalProductColors[0].generalProductColorImages);
+    
+      // setMainImage( productDetailsData.generalProductColors[0].generalProductColorImages[0].imageName)
+   
+    }
+  },[colorImages[0]]);
+
   const fetchProductDetails = (id) =>
     axios
       .get(`https://localhost:7216/api/Products/${stateIdFromProduct}`)
       .then((response) => response.data);
 
   const productDetails = useQuery("details", fetchProductDetails);
-  const { data: productDetailsData } = useQuery("details", fetchProductDetails);
+  const { data: productDetailsData, isSuccess } = useQuery(
+    "details",
+    fetchProductDetails
+  );
 
   const handleAddToCartClick = (product) => {
     addToCart(product);
-};
-  
+  };
+
+  const handleAddToWishlistClick = (product) => {
+    addToWishlist(product);
+    setIsFilled(!isFilled);
+  };
+
+  const handleSlideChange = (index) => {
+    setMainImage(colorImages[index]);
+    console.log("te");
+  };
+
+  const DecreaseCount = (count) => {
+    if (count === 1) {
+      return setProductCount(1);
+    }
+    setProductCount(count - 1);
+  };
+
+  const IncreaseCount = (count) => {
+    if(count === 100)
+    {
+      return setProductCount(100)
+    }
+    setProductCount(count+1)
+  };
+  // const handler = (id) => {
+  //   const filtereImage = images.find(({id}) => id === id)
+  //   setArray(filtereImage)
+  // }
+  console.log();
 
   return (
     <>
@@ -71,27 +121,22 @@ function ProductDetail() {
       {productDetails.isSuccess && (
         <section id="DetailHeading">
           <div className="container">
-          
             <Row>
-              
               <Col md={6}>
-              <div className="main-slider">
-              <Slider {...settings}>
-                <div className="slide-image">
-                  <img src={product1} alt="" />
+                <div className="main-slider">
+                  <Slider {...settings} afterChange={handleSlideChange}>
+                    {colorImages.map((image) => (
+                      <div className="slide-image">
+                        <img src={image.imageName} alt="" />
+                      </div>
+                    ))}
+                  </Slider>
                 </div>
-                <div className="slide-image">
-                  <img src={product1} alt="" />
-                </div>
-                <div className="slide-image"> 
-                  <img src={product1} alt="" />
-                </div>
-                <div className="slide-image"> 
-                  <img src={product1} alt="" />
-                </div>
-              </Slider>
-            </div>
-                <div className="product-image"></div>
+                <div
+                  style={{ backgroundImage: "Url(" + mainImage + ")"}}
+                  
+                  className="product-image"
+                ></div>
               </Col>
               <Col md={6}>
                 <div className="product-info">
@@ -116,7 +161,7 @@ function ProductDetail() {
                         <i className="fa-solid fa-star"></i>
                       </div>
                       <div className="review-count">
-                        (3<span> reviews</span>)
+                        (3<span>reviews</span>)
                       </div>
                     </div>
                     <div className="description">
@@ -125,28 +170,40 @@ function ProductDetail() {
                     <div className="color">
                       <h5>Color :</h5>
                       <div className="colors">
-                        {console.log(productDetailsData)}
-                        <span className="color1"></span>
-                        <span className="color2"></span>
-                        <span className="color3"></span>
+                        {productDetailsData.generalProductColors.map(
+                          ({ id, colorCode, generalProductColorImages}) => (
+                            <span key={id}
+                              onClick={() =>
+                                fetchProductColorImages(
+                                  generalProductColorImages
+                                )
+                              }
+                              style={{ background: colorCode }}
+                            ></span>
+                          )
+                        )}
                       </div>
                     </div>
                     <div className="buttons">
                       <div className="quantity">
-                        <button className="plus">
+                      <button
+                          onClick={() => IncreaseCount(productCount)}
+                          className="plus"
+                        >
                           <i className="fa-solid fa-plus"></i>
                         </button>
-                        <input
-                          min="0"
-                          max="3"
-                          name="quantity"
-                          inputMode="numeric"
-                        />
-                        <button className="minus">
+                        <span className="quantity">{productCount}</span>
+                        <button
+                          onClick={() => DecreaseCount(productCount)}
+                          className="minus"
+                        >
                           <i className="fa-solid fa-minus"></i>
                         </button>
                       </div>
-                      <div onClick={() => handleAddToCartClick(productDetailsData)} className="btn-add-to-cart">
+                      <div
+                        onClick={() => handleAddToCartClick(productDetailsData)}
+                        className="btn-add-to-cart"
+                      >
                         <a href="#" className="button">
                           Add to cart
                         </a>
@@ -155,13 +212,25 @@ function ProductDetail() {
                         <button className="buy-btn">Buy It Now</button>
                       </div>
                       <div className="btn-wishlist" data-title="Wishlist">
-                        <button className="product-btn">
-                          <i className="fa-regular fa-heart"></i>
+                        <button
+                          onClick={() =>
+                            handleAddToWishlistClick(productDetailsData)
+                          }
+                          className="product-btn"
+                        >
+                          <i
+                            className={
+                              isFilled
+                                ? "fa-solid fa-heart"
+                                : "fa-regular fa-heart"
+                            }
+                          ></i>
                           Add to Wishlist
                         </button>
                       </div>
                     </div>
                     <div className="meta">
+                      {productDetailsData.generalProductColors.find(x => x.id === productDetailsData.id)}
                       <span className="sku">
                         SKU: <span className="sku">D2300-3-2-2</span>
                       </span>
