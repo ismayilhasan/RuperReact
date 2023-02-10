@@ -1,13 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Col, Row } from "react-bootstrap";
-import product1 from "../../Assets/Images/product1.jpg";
 import useProducts from "../../query-hooks/useProducts";
-import "./style.scss";
 import { useHistory } from "react-router-dom";
 import { useAppContext } from "../../context/App";
-import axios from "axios";
-import { useQuery } from "react-query";
+import "./style.scss";
 
 // Product Components
 
@@ -17,8 +14,6 @@ function Product({product}){
   const [isFilled, setIsFilled] = React.useState(true);
   const history = useHistory();
   const {isSuccess} = useProducts();
-  const [mainImages,setMainImages] = React.useState("")
-  console.log(mainImages);
 
   const handleAddToCartClick = (product) => {
     addToCart(product);
@@ -52,7 +47,7 @@ function Product({product}){
       <img
         onClick={() => getProductDetails(product.id)}
         className="product-image"
-        src={product1}
+        src={product.imageName}
         alt=""
       />
       <i
@@ -93,7 +88,7 @@ function LatestProducts() {
             {products.isLoading && <p>Loading...</p>}
             {products.isError && <p>Could not fetch users</p>}
             {products.isSuccess &&
-              products.data.slice(productList.length - 2).map((product) => (
+              products.data.slice(productList.length - 4).map((product) => (
                 <Product product={product}/>
               ))}
           </Row>

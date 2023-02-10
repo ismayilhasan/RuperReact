@@ -6,7 +6,7 @@ import { useAppContext } from "../../context/App";
 import { Link } from "react-router-dom";
 import useBrands from "../../query-hooks/useBrands";
 function Header() {
-  const [{ toggleSidebar }] = useAppContext();
+  const [{ toggleSidebar,toggleSearchbar }] = useAppContext();
 
   return (
     <>
@@ -37,7 +37,6 @@ function Header() {
                       Shop
                     </Link>
                   </li>
-                  <li className="nav-item">Blog</li>
                   <li className="nav-item">
                     <Link className="navlink" to="/contact">
                       Contact
@@ -60,7 +59,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                  <i className="fa-solid fa-magnifying-glass right-icons-item"></i>
+                  <i onClick={toggleSearchbar} className="fa-solid fa-magnifying-glass right-icons-item"></i>
                 </li>
                 <li>
                   <Link to="/shop/wishlist" className="wishlist-link">

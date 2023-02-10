@@ -8,6 +8,7 @@ import useCategories from "../../query-hooks/useCategoires";
 import useProducts from "../../query-hooks/useProducts";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppContext } from "../../context/App";
+import axios from "axios";
 function Shop() {
 
   const brands = useBrands();
@@ -21,7 +22,9 @@ function Shop() {
   const { state: stateCategoryFromProduct } = useLocation("");
   const [{addToCart}] = useAppContext();
   const [sort, setSort] = React.useState("choose");
-  console.log(sort);
+
+
+  
   React.useEffect(() => {
     if (products.isSuccess) {
       setFilteredProducts(products.data);
@@ -169,7 +172,7 @@ function Shop() {
                     <Col key={product.id} md={4} col={12}>
                    
                       <div className="product-box">
-                        <img onClick={() => getProductDetails(product.id)}  className="product-image" src={product1} alt="" />
+                        <img onClick={() => getProductDetails(product.id)}  className="product-image" src={product.imageName} alt="" />
                         <div className="product-box-text">
                           <a className="name">{product.name}</a>
                           <span className="price">{product.price}</span>
@@ -183,6 +186,8 @@ function Shop() {
           </Row>
         </div>
       </section>
+
+ 
     </>
   );
 }

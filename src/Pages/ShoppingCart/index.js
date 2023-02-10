@@ -3,28 +3,33 @@ import "./style.scss";
 import product1 from "../../Assets/Images/product1.jpg";
 import { useAppContext } from "../../context/App";
 function ShoppingCart() {
-  const [{ cart }] = useAppContext();
-  const [productCount,setProductCount] = React.useState({})
+  const [{ cart,productCartCount,setProductCartCount,setCart }] = useAppContext();
+
 
 
   React.useEffect(() => { 
     const storedCount = localStorage.getItem('productCounts');
     if (storedCount) {
-      setProductCount(JSON.parse(storedCount));
+      setProductCartCount(JSON.parse(storedCount));
     }
   }, []);
 
   React.useEffect(() => {
-    localStorage.setItem('productCounts', JSON.stringify(productCount));
-  },[productCount])  
+    localStorage.setItem('productCounts', JSON.stringify(productCartCount));
+  },[productCartCount])  
   
   const handeChangeCount = (id,event) => {
-    setProductCount((prevState) => {
+    setProductCartCount((prevState) => {
       const newState = { ...prevState };
       newState[id] = event.target.value;  
       return newState;
     
     })
+  }
+
+  const deleteProduct = (id) => {
+    const newCart = cart.filter(product => (product.id !==  id))
+    setCart(newCart)
   }
 
   return (
@@ -66,7 +71,7 @@ function ShoppingCart() {
                                       <a className="shopping-product" href="#">
                                         <img
                                           className="product-image"
-                                          src={product1}
+                                          src={product.imageName}
                                           alt="Generic placeholder image"
                                         />
                                       </a>
@@ -95,7 +100,7 @@ function ShoppingCart() {
                               <div className="quote text-center mt-1">
                                 <input
                                   type="number"
-                                  value={productCount[product.id] == undefined? 1 :productCount[product.id] }
+                                  value={productCartCount[product.id] == undefined? 1 :productCartCount[product.id] }
                  
                                   min="1"
                                   max="100"
@@ -106,11 +111,11 @@ function ShoppingCart() {
                             <td>
                          
                             
-                              <h4 className="text-center amount">{(productCount[product.id] == undefined ? 1 : productCount[product.id])  * product.price}</h4>
+                              <h4 className="text-center amount">{(productCartCount[product.id] == undefined ? 1 : productCartCount[product.id])  * product.price}</h4>
                             </td>
                             <td className="text-center">
-                              <a className="btn-close" href="#.">
-                                <i className="lni-trash"></i>
+                              <a onClick={() => deleteProduct(product.id)} className="btn-close" href="#.">
+                                <i  className="lni-trash"></i>
                               </a>
                             </td>
                           </tr>

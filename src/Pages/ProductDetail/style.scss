@@ -23,6 +23,7 @@
 
   .product-image-content {
     width: 80%;
+    height: 300px;
 
   }
 
@@ -131,6 +132,7 @@
     }
 
     .buttons {
+      
       .quantity {
         border: 1px solid #b5b5b5 !important;
         height: 50px;
@@ -158,6 +160,7 @@
         width: 38px;
         height: 46px;
         background: transparent;
+        z-index: 2;
       }
       .minus {
         position: absolute;

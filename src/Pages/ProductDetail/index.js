@@ -8,10 +8,9 @@ import { useQuery } from "react-query";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import product1 from "../../Assets/Images/product1.jpg";
 import { useAppContext } from "../../context/App";
 function NextArrow(props) {
-  const { className, style, onClick } = props;
+  const { onClick } = props;
   return (
     <div className="next-arrow" onClick={onClick}>
       <i className="fa-solid fa-angle-right arrow-icon"></i>
@@ -39,40 +38,49 @@ function ProductDetail() {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-  const { state: stateIdFromProduct } = useLocation();
-  const [{ addToCart }] = useAppContext();
-  const [productCount, setProductCount] = React.useState(5);
-  const [isFilled, setIsFilled] = React.useState(false);
-  const [{ addToWishlist }] = useAppContext();
-  const [productColors, setProductColors] = React.useState([]);
-  const [colorImages, setColorImages] = React.useState([]);
-  const [mainImage,setMainImage] = React.useState("")
-  const fetchProductColorImages = (images) => {
-    setColorImages(images);
-    setMainImage(images[0].imageName)
-  };
- 
-  React.useEffect(() => {
-    if (isSuccess) {
-      setProductColors(productDetailsData.generalProductColors);
-      // console.log(productDetailsData.generalProductColors);
-      // console.log(productDetailsData.generalProductColors[0].generalProductColorImages);
-    
-      // setMainImage( productDetailsData.generalProductColors[0].generalProductColorImages[0].imageName)
-   
-    }
-  },[colorImages[0]]);
+
 
   const fetchProductDetails = (id) =>
-    axios
-      .get(`https://localhost:7216/api/Products/${stateIdFromProduct}`)
-      .then((response) => response.data);
+  axios
+    .get(`https://localhost:7216/api/Products/${stateIdFromProduct}`)
+    .then((response) => response.data);
 
   const productDetails = useQuery("details", fetchProductDetails);
   const { data: productDetailsData, isSuccess } = useQuery(
     "details",
     fetchProductDetails
   );
+  const { state: stateIdFromProduct } = useLocation();
+  const [{ addToCart,addToWishlist,productCartCount,setProductCartCount }] = useAppContext();
+  const [productCount, setProductCount] = React.useState(1);
+  const [isFilled, setIsFilled] = React.useState(false);
+  const [colorImages, setColorImages] = React.useState([]); 
+  const [mainImage,setMainImage] = React.useState()
+  console.log(productCount);
+  const fetchProductColorImages = (images) => {
+    setColorImages(images);
+    setMainImage(images[0].imageName)
+  };
+ 
+  
+  React.useEffect(() => { 
+
+    if(productDetails.isSuccess)
+    {
+      setMainImage(productDetailsData.imageName)
+    }
+
+    const storedCount = localStorage.getItem('productCounts');
+    if (storedCount) {
+      setProductCartCount(JSON.parse(storedCount));
+    }
+  }, []);
+
+
+
+
+
+
 
   const handleAddToCartClick = (product) => {
     addToCart(product);
@@ -85,28 +93,41 @@ function ProductDetail() {
 
   const handleSlideChange = (index) => {
     setMainImage(colorImages[index]);
-    console.log("te");
   };
 
-  const DecreaseCount = (count) => {
+  const DecreaseCount = (count,id) => {
+    setProductCount(count - 1);
     if (count === 1) {
       return setProductCount(1);
     }
-    setProductCount(count - 1);
+   
+
+    setProductCartCount((prevState) => {
+      const newState = { ...prevState };
+      newState[id] =  productCount
+      return newState;
+    })
   };
 
-  const IncreaseCount = (count) => {
+  const IncreaseCount = (count,id) => {
+    setProductCount(count+1)
+   
     if(count === 100)
     {
       return setProductCount(100)
     }
-    setProductCount(count+1)
+
+    
+    setProductCartCount((prevState) => {
+      const newState = { ...prevState };
+      newState[id] =  productCount
+      return newState;
+    })
   };
-  // const handler = (id) => {
-  //   const filtereImage = images.find(({id}) => id === id)
-  //   setArray(filtereImage)
-  // }
-  console.log();
+
+  
+
+  
 
   return (
     <>
@@ -187,14 +208,14 @@ function ProductDetail() {
                     <div className="buttons">
                       <div className="quantity">
                       <button
-                          onClick={() => IncreaseCount(productCount)}
+                          onClick={() => IncreaseCount(productCount,productDetailsData.id)}
                           className="plus"
                         >
                           <i className="fa-solid fa-plus"></i>
                         </button>
-                        <span className="quantity">{productCount}</span>
+                        <span  className="quantity">{productCount}</span>
                         <button
-                          onClick={() => DecreaseCount(productCount)}
+                          onClick={() => DecreaseCount(productCount,productDetailsData.id)}
                           className="minus"
                         >
                           <i className="fa-solid fa-minus"></i>

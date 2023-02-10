@@ -12,8 +12,6 @@ function Wishlist() {
 
   const deleteProduct = (id) => {
     const newWishlistCart = wishlistCart.filter(product => (product.id !==  id))
-    console.log("test");
-    console.log(newWishlistCart);
     setWishlistCart(newWishlistCart)
   }
 
@@ -35,7 +33,7 @@ function Wishlist() {
                     <i onClick={() => deleteProduct(product.id)} className="fa-solid fa-xmark delete-button"></i>
                   </td>
                   <td className="image-row">
-                    <img className="product-image" src={product2} alt="" />
+                    <img className="product-image" src={product.imageName} alt="" />
                   </td>
                   <td className="name-price-image-date-row">
                     <a href="">{product.name}</a>
