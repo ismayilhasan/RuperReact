@@ -76,6 +76,10 @@ function ProductDetail() {
     }
   }, []);
 
+  React.useEffect(() => {
+    localStorage.setItem('productCounts', JSON.stringify(productCartCount));
+  },[productCartCount])  
+
 
 
 
@@ -213,7 +217,7 @@ function ProductDetail() {
                         >
                           <i className="fa-solid fa-plus"></i>
                         </button>
-                        <span  className="quantity">{productCount}</span>
+                        <span  className="quantity">{productCartCount[productDetailsData.id]}</span>
                         <button
                           onClick={() => DecreaseCount(productCount,productDetailsData.id)}
                           className="minus"

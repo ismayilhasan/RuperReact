@@ -4,21 +4,25 @@ import { useAppContext } from "../../context/App";
 import "./style.scss";
 
 function Login() {
-  const [{user,setUser}] = useAppContext();
+  const [{ user, setUser }] = useAppContext();
 
   const handleRegisterChange = (e) => {
-    const {name,value} = e.target
-    setUser({...user,[name]:value})
-  }
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const { Username, Password } = user;
+    const loginData = { Username, Password, Email: Username };
+
     axios
-      .post("https://localhost:7216/register", user)
+      .post("https://localhost:7216/login", loginData)
       .then((res) => console.log(res))
       .catch((err) => {
-        console.error(err)
-        console.error(err.response)
+        console.error(err);
+        console.error(err.response);
       });
   };
   return (
@@ -31,18 +35,21 @@ function Login() {
 
       <section id="LoginSection">
         <div className="box-form-login">
-          <h2><i className="fa-solid fa-user"></i>Login</h2>
+          <h2>
+            <i className="fa-solid fa-user"></i>Login
+          </h2>
           <div className="box-content">
             <div className="form-login">
-              <form  onSubmit={handleSubmit} className="login">
+              <form onSubmit={handleSubmit} className="login">
                 <div className="username">
                   <label>
-                    Username or email address <span className="required">*</span>
+                    Username or email address{" "}
+                    <span className="required">*</span>
                   </label>
                   <input
                     type="text"
                     className="input-text"
-                    name="username"
+                    name="Username"
                     id="username"
                     onChange={handleRegisterChange}
                   />
@@ -51,11 +58,21 @@ function Login() {
                   <label for="password">
                     Password <span className="required">*</span>
                   </label>
-                  <input  onChange={handleRegisterChange} className="input-text" type="password" name="password" />
+                  <input
+                    onChange={handleRegisterChange}
+                    className="input-text"
+                    type="password"
+                    name="Password"
+                  />
                 </div>
                 <div className="rememberme-lost">
                   <div className="remember-me">
-                    <input className="checkbox-input" name="rememberme" type="checkbox" value="forever" />
+                    <input
+                      className="checkbox-input"
+                      name="rememberme"
+                      type="checkbox"
+                      value="forever"
+                    />
                     <label className="inline">Remember me</label>
                   </div>
                   <div className="lost-password">
@@ -63,7 +80,9 @@ function Login() {
                   </div>
                 </div>
                 <div className="button-login">
-                <button className="button" type='submit'>Login</button>
+                  <button className="button" type="submit">
+                    Login
+                  </button>
                 </div>
               </form>
             </div>

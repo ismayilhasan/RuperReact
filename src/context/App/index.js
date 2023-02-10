@@ -7,7 +7,7 @@ function AppProvider({ children }) {
   const [searchbar, setSearchbar] = React.useState(false);
   const [cart, setCart] = React.useState([]);
   const [wishlistCart, setWishlistCart] = React.useState([]);
-  const [productCartCount,setProductCartCount] = React.useState({})
+  const [productCartCount,setProductCartCount] = React.useState({0:1})
   const [user,setUser] = React.useState({
     FirstName:"",
     LastName:"",
