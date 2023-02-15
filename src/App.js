@@ -15,6 +15,16 @@ import Wishlist from "./Pages/Wishlist";
 import ShoppingCart from "./Pages/ShoppingCart";
 import { QueryClientProvider,QueryClient} from "react-query";
 import AboutUs from "./Pages/AboutUs";
+import Dashboard from "./Pages/Dashboard";
+import BrandsForm from "./Pages/BrandsForm";
+import CreateBrand from "./Pages/BrandsForm/CreateBrand";
+import UpdateBrand from "./Pages/BrandsForm/UpdateBrand";
+import CategoriesForm from "./Pages/CategoriesForm";
+import CreateCategory from "./Pages/CategoriesForm/CreateCategory";
+import UpdateCategory from "./Pages/CategoriesForm/UpdateCategory";
+import SubcategoriesForm from "./Pages/SubcategoiresForm";
+import CreateSubCategory from "./Pages/SubcategoiresForm/CreateSubCategory";
+import UpdateSubCategory from "./Pages/SubcategoiresForm/UpdateSubCategory";
 // import Shop from "./Pages/Shop";
 function App() {
   const queryClient = new QueryClient();
@@ -51,6 +61,36 @@ function App() {
           </Route>
           <Route path="/about-us" exact>
                 <AboutUs/>
+          </Route>
+          <Route path="/admin" exact>
+              <Dashboard/>
+          </Route>
+          <Route path="/admin/brands" exact>
+              <BrandsForm/>
+          </Route>
+          <Route path="/admin/brands/create" exact>
+            <CreateBrand/>
+          </Route>
+          <Route path="/admin/brands/update" exact>
+            <UpdateBrand/>
+          </Route>
+          <Route path="/admin/category" exact>
+            <CategoriesForm/>
+          </Route>
+          <Route path="/admin/category/create" exact>
+            <CreateCategory/>
+          </Route>
+          <Route path="/admin/category/update" exact>
+            <UpdateCategory/>
+          </Route>
+          <Route path="/admin/subcategory" exact>
+            <SubcategoriesForm/>
+          </Route>
+          <Route path="/admin/subcategory/create" exact>
+            <CreateSubCategory/>
+          </Route>
+          <Route path="/admin/subcategory/update" exact>
+            <UpdateSubCategory/>
           </Route>
         </Switch>
         <Footer/>

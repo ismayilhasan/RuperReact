@@ -1,30 +1,53 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
+import AuthService from "../../services/auth.service";
+import { Link, useHistory } from "react-router-dom";
 import { useAppContext } from "../../context/App";
 import "./style.scss";
 
 function Login() {
-  const [{ user, setUser }] = useAppContext();
+  const { push } = useHistory();
+  const [{ user, setUser, setHeaderUsername }] = useAppContext();
 
   const handleRegisterChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
+  useEffect(() => {
+    if (AuthService.isLoggedIn()) push("/");
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const { Username, Password } = user;
     const loginData = { Username, Password, Email: Username };
+    localStorage.setItem("headerUsername",Username)
+   
+    AuthService.login(loginData).then(() => {
+      push("/");
+      
+    });
 
-    axios
-      .post("https://localhost:7216/login", loginData)
-      .then((res) => console.log(res))
-      .catch((err) => {
-        console.error(err);
-        console.error(err.response);
-      });
+    // bu kodu login isteyen bir endpoint ucun istifade ede bilersne
+    // axios
+    //   .post("https://localhost:7216/api/Products", {
+    //     headers: {
+    //       "Authorization" : `Bearer {token_bura}`
+    //     }
+    //   })
+    //   .then((res) => {
+
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //     console.error(err.response);
+    //   });
+
+    setHeaderUsername(Username);
   };
+
   return (
     <>
       <div className="login-heading">
@@ -85,6 +108,12 @@ function Login() {
                   </button>
                 </div>
               </form>
+              <p class="text-center mt-4">
+                Don't have an account?{" "}
+                <Link to="/register" className="sign-up">
+                  Sign up
+                </Link>
+              </p>
             </div>
           </div>
         </div>

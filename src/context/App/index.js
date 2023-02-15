@@ -4,6 +4,7 @@ const AppContext = React.createContext([]);
 
 function AppProvider({ children }) {
   const [sidebar, setSidebar] = React.useState(false);
+  const [headerUsername,setHeaderUsername] = React.useState(null)
   const [searchbar, setSearchbar] = React.useState(false);
   const [cart, setCart] = React.useState([]);
   const [wishlistCart, setWishlistCart] = React.useState([]);
@@ -63,7 +64,8 @@ function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={[{ sidebar, toggleSidebar, addToCart, cart,setCart, addToWishlist,
-      wishlistCart, setWishlistCart, searchbar, toggleSearchbar,user,setUser,productCartCount,setProductCartCount }]}>
+      wishlistCart, setWishlistCart, searchbar, toggleSearchbar,user,setUser,productCartCount,setProductCartCount
+      ,headerUsername,setHeaderUsername }]}>
       {children}
     </AppContext.Provider>
   );

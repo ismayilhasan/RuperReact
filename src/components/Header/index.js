@@ -4,10 +4,16 @@ import headerLogoImage from "../../Assets/Images/header-logo.png";
 import "bootstrap";
 import { useAppContext } from "../../context/App";
 import { Link } from "react-router-dom";
-import useBrands from "../../query-hooks/useBrands";
+import AuthService from "../../services/auth.service";
 function Header() {
-  const [{ toggleSidebar,toggleSearchbar }] = useAppContext();
-
+  const [{ toggleSidebar,toggleSearchbar,headerUsername }] = useAppContext();
+  const headerofUsername = localStorage.getItem("headerUsername")
+  const handleLogout = () => {
+    console.log("sd");
+    AuthService.logout();
+    localStorage.removeItem("headerUsername")
+    window.location.reload(false);
+  }
   return (
     <>
       <header id="Header">
@@ -55,9 +61,14 @@ function Header() {
               <ul className="right-icons-area-all">
                 <li>
                   <Link to="/login" className="login-link">
-                    Login
+                    {headerofUsername? headerofUsername  : "Login"}
                   </Link>
+              
+               
                 </li>
+                <Link onClick={() => handleLogout()} style={{cursor:"pointer"}} className="login-link">
+                   {headerofUsername && <p  >Log out</p>}
+                  </Link>
                 <li>
                   <i onClick={toggleSearchbar} className="fa-solid fa-magnifying-glass right-icons-item"></i>
                 </li>

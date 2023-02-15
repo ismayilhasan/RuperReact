@@ -4,9 +4,9 @@ import product1 from "../../Assets/Images/product1.jpg";
 import { useAppContext } from "../../context/App";
 function ShoppingCart() {
   const [{ cart,productCartCount,setProductCartCount,setCart }] = useAppContext();
+  const [totalPrice,setTotalPrice] = React.useState(0)
 
-
-
+  const total = cart.reduce((acc, item) => acc + item.price, 0);
   React.useEffect(() => { 
     const storedCount = localStorage.getItem('productCounts');
     if (storedCount) {
@@ -18,6 +18,7 @@ function ShoppingCart() {
     localStorage.setItem('productCounts', JSON.stringify(productCartCount));
   },[productCartCount])  
   
+  
   const handeChangeCount = (id,event) => {
     setProductCartCount((prevState) => {
       const newState = { ...prevState };
@@ -25,6 +26,10 @@ function ShoppingCart() {
       return newState;
     
     })
+    
+
+ 
+ 
   }
 
   const deleteProduct = (id) => {
@@ -133,16 +138,13 @@ function ShoppingCart() {
               <div className="sub-total d-flex justify-content-start align-items-center">
                 <h6 className="me-3">Common Product Count </h6>
                 <p id="subtotal" className="mt-1">
-                  {/* {Object.values(productCount).map((value) => (
-                      totalValue+=value
-                  ))}  */}
-                  
+                      1
                 </p>
               </div>
               <div className="total d-flex justify-content-start">
                 <h6 className="me-3">total</h6>
                 <p id="total" className="">
-                  0
+                  {total}
                 </p>
               </div>
             </div>

@@ -1,0 +1,20 @@
+.admin-heading {
+    text-align: center;
+    background-image: url("../../Assets/Images/shop-heading-back-image.jpg");
+    background-position: top;
+    height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      text-transform: capitalize;
+      font-size: 3.125pc;
+      font-weight: 400;
+      font-family: Barlow Semi Condensed;
+    }
+}
+
+.form-image{
+    width: 00px;
+    height: 200px;
+}
