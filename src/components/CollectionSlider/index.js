@@ -6,6 +6,25 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import './style.scss'
 
+
+function NextArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="next-arrow" onClick={onClick}>
+      <i className="fa-solid fa-angle-right arrow-icon"></i>
+    </div>
+  );
+}
+
+function PrevArrow(props) {
+  const { onClick } = props;
+  return (
+    <div className="prev-arrow" onClick={onClick}>
+      <i className="fa-solid fa-angle-left arrow-icon"></i>
+    </div>
+  );
+}
+
 export default function CollectionSlider() {
   const [data, setData] = useState([]);
   const history = useHistory();
@@ -28,6 +47,8 @@ export default function CollectionSlider() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   return (

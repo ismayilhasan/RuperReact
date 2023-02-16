@@ -58,3 +58,26 @@
         }
     }
 }
+
+.prev-arrow{
+    position: absolute;
+    top: 38%;
+    left: -10px;
+    background-color: #615959;
+    color: #fff;
+    padding: 3px 5px;
+    font-size: 24px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.next-arrow{
+    position: absolute;
+    top: 38%;
+    right: -10px;
+    background-color: #615959;
+    color: #fff;
+    padding: 3px 5px;
+    font-size: 24px;
+    cursor: pointer;
+}

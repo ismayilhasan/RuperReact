@@ -25,6 +25,10 @@ import UpdateCategory from "./Pages/CategoriesForm/UpdateCategory";
 import SubcategoriesForm from "./Pages/SubcategoiresForm";
 import CreateSubCategory from "./Pages/SubcategoiresForm/CreateSubCategory";
 import UpdateSubCategory from "./Pages/SubcategoiresForm/UpdateSubCategory";
+import SliderForm from "./Pages/SliderForm";
+import CreateSlider from "./Pages/SliderForm/CreateSlider";
+import UpdateSlider from "./Pages/SliderForm/UpdateSlider";
+import ColorsForm from "./Pages/Colors";
 // import Shop from "./Pages/Shop";
 function App() {
   const queryClient = new QueryClient();
@@ -91,6 +95,18 @@ function App() {
           </Route>
           <Route path="/admin/subcategory/update" exact>
             <UpdateSubCategory/>
+          </Route>
+          <Route path="/admin/slider" exact>
+            <SliderForm/>
+          </Route>
+          <Route path="/admin/slider/create" exact>
+            <CreateSlider/>
+          </Route>
+          <Route path="/admin/slider/update" exact>
+            <UpdateSlider/>
+          </Route>
+          <Route path="/admin/colors" exact>
+            <ColorsForm/>
           </Route>
         </Switch>
         <Footer/>

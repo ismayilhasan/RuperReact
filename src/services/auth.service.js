@@ -30,7 +30,7 @@ const getCurrentUser = () => {
 };
 
 const isLoggedIn = () => {
-  return getCurrentUser() != null ? true : false;
+  return getCurrentUser() !== null ? true : false;
 };
 
 const AuthService = {

@@ -45,8 +45,10 @@
     position: absolute;
     left: -48px;
     top: 414px;
-    z-index: 2;
+    z-index: 35;
     cursor: pointer;
+    color: #000;
+    background-color: #fff;
   }
 
    .next-arrow{
@@ -55,10 +57,11 @@
     top: 414px;
     z-index: 2;
     cursor: pointer;
+    color: #000;
+    background-color: #fff;
   }
 
   .arrow-icon{
-    background-color: #fff;
     padding: 10px;
 
   }

@@ -1,19 +1,34 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import { useHistory, useNavigate } from "react-router-dom";
 import  logo from './logo.svg'
 import { useAppContext } from '../../context/App';
 import { Link } from 'react-router-dom';
+import AuthService from '../../services/auth.service';
 import './dropdown.css'
 import './style.scss'
 import './style.css'
 function Dashboard() {
     const [{ sidebar,toggleSidebar }] = useAppContext();
+    const {push} = useHistory();
+    const [currentUser, setCurrentUser] = useState(undefined);
     // const [isLogin, setLogin] = useState(false)
 
     // if (!isLogin){
     //   navigate("/login");
     //   return;
     // }
+
+    React.useEffect(() => {
+      const user = AuthService.getCurrentUser();
+      if(!user)
+      {
+        push("/login")
+      }
+      else{
+        push("/admin")
+      }
+    
+    },[])
 
   return (
     <>
