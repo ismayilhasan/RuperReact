@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import useProducts from "../../query-hooks/useProducts";
 import { useHistory } from "react-router-dom";
 import { useAppContext } from "../../context/App";
+
 import "./style.scss";
 
 // Product Components
@@ -95,7 +96,10 @@ function LatestProducts() {
           <button className="loadmore-button">Load more</button>
         </div>
       </div>
+
     </section>
+
+    
   );
 }
 

@@ -5,7 +5,6 @@ import { useAppContext } from '../../context/App';
 import { Link } from 'react-router-dom';
 import AuthService from '../../services/auth.service';
 import './dropdown.css'
-import './style.scss'
 import './style.css'
 function Dashboard() {
     const [{ sidebar,toggleSidebar }] = useAppContext();

@@ -29,6 +29,13 @@ import SliderForm from "./Pages/SliderForm";
 import CreateSlider from "./Pages/SliderForm/CreateSlider";
 import UpdateSlider from "./Pages/SliderForm/UpdateSlider";
 import ColorsForm from "./Pages/Colors";
+import UpdateColor from "./Pages/Colors/UpdateColor";
+import CreateColor from "./Pages/Colors/CreateColor";
+import ProductsForm from "./Pages/ProductsForm";
+import CreateProduct from "./Pages/ProductsForm/CreateProduct";
+import UpdateProduct from "./Pages/ProductsForm/UpdateProduct";
+import ProductColor from "./Pages/ProductsForm/ProductColor";
+import ProductColorImages from "./Pages/ProductsForm/ProductColorImages";
 // import Shop from "./Pages/Shop";
 function App() {
   const queryClient = new QueryClient();
@@ -107,6 +114,27 @@ function App() {
           </Route>
           <Route path="/admin/colors" exact>
             <ColorsForm/>
+          </Route>
+          <Route path="/admin/colors/create" exact>
+            <CreateColor/>
+          </Route>
+          <Route path="/admin/colors/update" exact>
+            <UpdateColor/>
+          </Route>
+          <Route path="/admin/products" exact>
+            <ProductsForm/>
+          </Route>
+          <Route path="/admin/products/create" exact>
+            <CreateProduct/>
+          </Route>
+          <Route path="/admin/products/update" exact>
+            <UpdateProduct/>
+          </Route>
+          <Route path="/admin/productsColor" exact>
+            <ProductColor/>
+          </Route>
+          <Route path="/admin/productsColorImage" exact>
+            <ProductColorImages/>
           </Route>
         </Switch>
         <Footer/>

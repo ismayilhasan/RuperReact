@@ -1,19 +1,17 @@
-import axios from 'axios';
-import React from 'react'
-import { useHistory } from 'react-router-dom';
-import useCategories from '../../query-hooks/useCategoires';
+import axios from "axios";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import useCategories from "../../query-hooks/useCategoires";
 
 function CreateSubCategory() {
   const [subcategoryName, setSubcategoryName] = React.useState("");
   const [subcategoryImage, setSubcategoryImage] = React.useState(null);
-  const [categoryId,setCategoryId]  = React.useState(1)
-  const {data:categoires,isLoading,isSuccess,isError} = useCategories();
-  const {push} = useHistory()
+  const [categoryId, setCategoryId] = React.useState(1);
+  const { data: categoires, isLoading, isSuccess, isError } = useCategories();
+  const { push } = useHistory();
   const handleSelectChange = (event) => {
-    setCategoryId(event.target.value)
-
-  }
-
+    setCategoryId(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,8 +19,8 @@ function CreateSubCategory() {
     const formData = new FormData();
     formData.append("name", subcategoryName);
     formData.append("image", subcategoryImage);
-    formData.append("categoryId",categoryId)
-    
+    formData.append("categoryId", categoryId);
+
     try {
       const response = await axios.post(
         "https://localhost:7216/api/SubCategories",
@@ -33,7 +31,7 @@ function CreateSubCategory() {
           },
         }
       );
-      push("/admin/subcategory")
+      push("/admin/subcategory");
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +42,7 @@ function CreateSubCategory() {
   };
   return (
     <>
-         <div className="admin-heading">
+      <div className="admin-heading">
         <div className="container">
           <h1 className="shop-title-heading">Admin</h1>
         </div>
@@ -76,17 +74,21 @@ function CreateSubCategory() {
                 />
               </div>
               <div className="form-group">
-                <label style={{display:"block"}}>Category Image</label>
-                  <select value={categoryId} onChange={handleSelectChange} className='w-100 p-3'>
-                    {isLoading && <p>Loading...</p>}
-                    {isError && <p>cant fetch data...</p>}
-                    {isSuccess && categoires.map((category) => (
-                      <option value={category.id} key={category.id}  >
+                <label style={{ display: "block" }}>Category Image</label>
+                <select
+                  value={categoryId}
+                  onChange={handleSelectChange}
+                  className="w-100 p-3"
+                >
+                  {isLoading && <p>Loading...</p>}
+                  {isError && <p>cant fetch data...</p>}
+                  {isSuccess &&
+                    categoires.map((category) => (
+                      <option value={category.id} key={category.id}>
                         {category.name}
                       </option>
                     ))}
-                     
-                  </select>
+                </select>
               </div>
 
               <button type="submit" className="btn btn-primary mr-2">
@@ -98,7 +100,7 @@ function CreateSubCategory() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default CreateSubCategory
+export default CreateSubCategory;
